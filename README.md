@@ -1,1 +1,4 @@
-# p02-IA
+# p02-IA: Coche autonomo
+- Autores:
+  - Sergio Nicolás Seguí
+  - Javier ...
