@@ -1,4 +1,4 @@
 # p02-IA: Coche autonomo
 - Autores:
   - Sergio Nicolás Seguí
-  - Javier ...
+  - Javier Ginzález de la Barreda Arimany
