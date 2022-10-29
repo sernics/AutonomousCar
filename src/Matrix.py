@@ -1,6 +1,5 @@
 import tkinter as tk
 
-
 class Matrix(object):
     def __init__(self, width, height, range_i, range_j):
         self.__v_width = width

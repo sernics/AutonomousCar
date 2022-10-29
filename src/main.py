@@ -1,12 +1,11 @@
 from Matrix import Matrix
 
 def main():
-  matrix = Matrix(2560, 1080, 50, 50)
+  matrix = Matrix(1920, 1080, 100, 100)
   matrix.print()
-  matrix.print_position(1, 1, "red")
-  matrix.print_position(2, 1, "orange")
-  matrix.print_position(3, 1, "blue")
-  matrix.print_position(4, 1, "grey")
+  for i in range(1, 100 + 1):
+    matrix.print_position(i - 1, 1, "orange")
+    matrix.print_position(i, 1, "red")
   matrix.execute()
   
 if __name__ == "__main__":
