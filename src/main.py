@@ -1,4 +1,3 @@
-from numpy import mat
 from Matrix import Matrix
 
 def main():
