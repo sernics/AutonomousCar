@@ -27,3 +27,6 @@ class Matrix(object):
 
     def execute(self):
         self.__window.mainloop()
+
+    def length(self):
+        return self.__range_i * self.__range_j
