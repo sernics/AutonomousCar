@@ -14,16 +14,40 @@ class Minway(object):
 
   def a_star(self, initial_position : Point, final_position : Point):
     actual_position : Point = initial_position
-    while actual_position != final_position:
-      heuristic = 10000000000000000
-      
-      self.__matrix.print_position(actual_position.get_position_x(), actual_position.get_position_y(), "orange")
-    return 0
-
-  def get_heuristic(self, actual_heuristic, point1 : Point, point2 : Point):
-    if ((self.__get_heuristic_manhattan(point1, point2) < actual_heuristic) and (self.__visited[point1.get_position_x()][point1.get_position_y()])):
-      return self.__get_heuristic_manhattan(point1, point2)
-    return actual_heuristic 
+    # Mientras la posicion actual no sea la posicion final
+    while (actual_position.get_position_x() != final_position.get_position_x()) and (actual_position.get_position_y() != final_position.get_position_y()):
+      heuristic = 10000000000000000000000
+      next_position : Point
+      # En esta versión, solo se puede mover arriba, abajo, izquierda y derecha
+      # Calculamos el valor de arriba
+      if actual_position.get_position_y() + 1 < self.__matrix.get_range_j():
+        if not(self.__visited[actual_position.get_position_x()][actual_position.get_position_y() + 1]):
+          heuristic_up = self.__get_heuristic_euclidean(Point(actual_position.get_position_x(), actual_position.get_position_y() + 1), final_position)
+          if heuristic_up < heuristic:
+            heuristic = heuristic_up
+            next_position = Point(actual_position.get_position_x(), actual_position.get_position_y() + 1)
+      # Calculamos el valor de abajo
+      if actual_position.get_position_y() - 1 >= 0:
+        if not(self.__visited[actual_position.get_position_x()][actual_position.get_position_y() - 1]):
+          heuristic_down = self.__get_heuristic_euclidean(Point(actual_position.get_position_x(), actual_position.get_position_y() - 1), final_position)
+          if heuristic_down < heuristic:
+            heuristic = heuristic_down
+            next_position = Point(actual_position.get_position_x(), actual_position.get_position_y() - 1)
+      # Calculamos el valor de la izquierda
+      if actual_position.get_position_x() - 1 >= 0:
+        if not(self.__visited[actual_position.get_position_x() - 1][actual_position.get_position_y()]):
+          heuristic_left = self.__get_heuristic_euclidean(Point(actual_position.get_position_x() - 1, actual_position.get_position_y()), final_position)
+          if heuristic_left < heuristic:
+            heuristic = heuristic_left
+            next_position = Point(actual_position.get_position_x() - 1, actual_position.get_position_y())
+      # Calculamos el valor de la derecha
+      if actual_position.get_position_x() + 1 < self.__matrix.get_range_i():
+        if not(self.__visited[actual_position.get_position_x() + 1][actual_position.get_position_y()]):
+          heuristic_right = self.__get_heuristic_euclidean(Point(actual_position.get_position_x() + 1, actual_position.get_position_y()), final_position)
+          if heuristic_right < heuristic:
+            heuristic = heuristic_right
+            next_position = Point(actual_position.get_position_x() + 1, actual_position.get_position_y())
+      actual_position = next_position
 
   # Funcion que calcula la distancia de manhattan entre dos nodos
   def __get_heuristic_manhattan(self, position1 : Point, position2 : Point):
