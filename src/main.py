@@ -1,4 +1,6 @@
 from Matrix import Matrix
+from Minway import Minway
+from Point import Point
 
 def main():
   weight = 500 # int(input("Enter the width of the matrix: "))
@@ -6,13 +8,11 @@ def main():
   range_i = int(input("Enter the range of the matrix in the i axis: "))
   range_j = int(input("Enter the range of the matrix in the j axis: "))
   matrix = Matrix(weight, height, range_i, range_j)
+  minway = Minway(matrix)
   matrix.print()
-  matrix.print_position(1,1, "red")
-  for i in  range(1, range_i + 1):
-    matrix.print_position(i, i, "orange")
-    matrix.print_position(i, i + 1, "orange")
-  matrix.print_position(1, 1, "red")
-  matrix.print_position(range_i, range_j, "blue")
+  initial_position = Point(0, 0)
+  final_position = Point(10, 10)
+  minway.a_star(initial_position, final_position)
   matrix.execute()
 if __name__ == "__main__":
   main()

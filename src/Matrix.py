@@ -14,6 +14,12 @@ class Matrix(object):
                                   height=self.__v_height, bg="black")
         self.__canvas.pack()
 
+    def get_range_i(self):
+        return self.__range_i
+    
+    def get_range_j(self):
+        return self.__range_j
+
     def print(self):
         for i in range(self.__range_i):
             for j in range(self.__range_j):
