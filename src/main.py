@@ -1,6 +1,6 @@
+from Point import Point
 from Matrix import Matrix
 from Minway import Minway
-from Point import Point
 
 def main():
   weight = 500 # int(input("Enter the width of the matrix: "))
