@@ -8,11 +8,14 @@ def main():
   range_i = int(input("Enter the range of the matrix in the i axis: "))
   range_j = int(input("Enter the range of the matrix in the j axis: "))
   matrix = Matrix(weight, height, range_i, range_j)
-  minway = Minway(matrix)
   matrix.print()
-  initial_position = Point(0, 0)
-  final_position = Point(10, 10)
-  minway.a_star(initial_position, final_position)
+  minway = Minway(matrix)
+  point1 : Point = Point(8, 14)
+  point2 : Point = Point(4, 7)
+  minway.first_better(point1, point2)
+  matrix.print_position(point1.get_position_x(), point1.get_position_y(), "red")
+  matrix.print_position(point2.get_position_x(), point2.get_position_y(), "blue")
   matrix.execute()
+
 if __name__ == "__main__":
   main()

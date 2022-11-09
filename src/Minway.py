@@ -12,47 +12,38 @@ class Minway(object):
         line.append(False)
       self.__visited.append(line)
 
-  def movement(self, initial_position : Point, final_position : Point):
-    actual_position : Point = initial_position
-    # Mientras la posicion actual no sea la posicion final
-    while (actual_position.get_position_x() != final_position.get_position_x()) and (actual_position.get_position_y() != final_position.get_position_y()):
-      heuristic = 10000000000000000000000
-      next_position : Point
-      # En esta versión, solo se puede mover arriba, abajo, izquierda y derecha
-      # Calculamos el valor de arriba
-      if actual_position.get_position_y() + 1 < self.__matrix.get_range_j():
-        if not(self.__visited[actual_position.get_position_x()][actual_position.get_position_y() + 1]):
-          heuristic_up = self.__get_heuristic_manhattan(Point(actual_position.get_position_x(), actual_position.get_position_y() + 1), final_position)
-          if heuristic_up < heuristic:
-            heuristic = heuristic_up
-            next_position = Point(actual_position.get_position_x(), actual_position.get_position_y() + 1)
-      # Calculamos el valor de abajo
-      if actual_position.get_position_y() - 1 >= 0:
-        if not(self.__visited[actual_position.get_position_x()][actual_position.get_position_y() - 1]):
-          heuristic_down = self.__get_heuristic_manhattan(Point(actual_position.get_position_x(), actual_position.get_position_y() - 1), final_position)
-          if heuristic_down < heuristic:
-            heuristic = heuristic_down
-            next_position = Point(actual_position.get_position_x(), actual_position.get_position_y() - 1)
-      # Calculamos el valor de la izquierda
-      if actual_position.get_position_x() - 1 >= 0:
-        if not(self.__visited[actual_position.get_position_x() - 1][actual_position.get_position_y()]):
-          heuristic_left = self.__get_heuristic_manhattan(Point(actual_position.get_position_x() - 1, actual_position.get_position_y()), final_position)
-          if heuristic_left < heuristic:
-            heuristic = heuristic_left
-            next_position = Point(actual_position.get_position_x() - 1, actual_position.get_position_y())
-      # Calculamos el valor de la derecha
-      if actual_position.get_position_x() + 1 < self.__matrix.get_range_i():
-        if not(self.__visited[actual_position.get_position_x() + 1][actual_position.get_position_y()]):
-          heuristic_right = self.__get_heuristic_manhattan(Point(actual_position.get_position_x() + 1, actual_position.get_position_y()), final_position)
-          if heuristic_right < heuristic:
-            heuristic = heuristic_right
-            next_position = Point(actual_position.get_position_x() + 1, actual_position.get_position_y())
-      self.__matrix.print_position(next_position.get_position_x(), next_position.get_position_y(), "orange")
-      actual_position = next_position
+  def first_better(self, initial_position : Point, final_position : Point):
+    found = False
+    actual_position = initial_position
+    self.__visited[actual_position.get_position_x()][actual_position.get_position_y()] = True
+    while not found:
+      if (actual_position.get_position_x() == final_position.get_position_x()) and (actual_position.get_position_y() == final_position.get_position_y()):
+        found = True
+      neighbors = self.neighbors(actual_position)
+      heuristic = 10000000000
+      for neighbor in neighbors:
+        # if not self.__visited[neighbor.get_position_x()][neighbor.get_position_y()]:
+        if self.__get_heuristic_manhattan(neighbor, final_position) < heuristic:
+            heuristic = self.__get_heuristic_manhattan(neighbor, final_position)
+            actual_position = neighbor
+      self.__matrix.print_position(neighbor.get_position_x(), neighbor.get_position_y() + 1, "orange")      
 
-  # Funcion que calcula la distancia de manhattan entre dos nodos
+  def neighbors(self, position : Point):
+    neighbors = []
+    if position.get_position_x() + 1 < self.__matrix.get_range_i() + 1:
+      neighbors.append(Point(position.get_position_x() + 1, position.get_position_y()))
+    if position.get_position_x() - 1 >= 0:
+      neighbors.append(Point(position.get_position_x() - 1, position.get_position_y()))
+    if position.get_position_y() + 1 < self.__matrix.get_range_j() + 1:
+      neighbors.append(Point(position.get_position_x(), position.get_position_y() + 1))
+    if position.get_position_y() - 1 >= 0:
+      neighbors.append(Point(position.get_position_x(), position.get_position_y() - 1))
+    return neighbors
+
+  # Funcion que calcula la distancia de manhattan entre dos puntos
   def __get_heuristic_manhattan(self, position1 : Point, position2 : Point):
     return (abs(position1.get_position_x() - position2.get_position_x()) + abs(position1.get_position_y() - position2.get_position_y()))
 
+  # Función que calcula la distancia euclidea entre dos puntos
   def __get_heuristic_euclidean(self, position1 : Point, position2 : Point):
     return (np.sqrt((position1.get_position_x() - position2.get_position_x())**2 + (position1.get_position_y() - position2.get_position_y())**2))

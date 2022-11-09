@@ -1,0 +1,72 @@
+Actual position: 8 14
+Neighbor: 914
+Neighbor: 714
+Neighbor: 815
+Neighbor: 813
+
+Actual position: 7 14
+Neighbor: 814
+Neighbor: 614
+Neighbor: 715
+Neighbor: 713
+
+Actual position: 6 14
+Neighbor: 714
+Neighbor: 514
+Neighbor: 615
+Neighbor: 613
+
+Actual position: 5 14
+Neighbor: 614
+Neighbor: 414
+Neighbor: 515
+Neighbor: 513
+
+Actual position: 4 14
+Neighbor: 514
+Neighbor: 314
+Neighbor: 415
+Neighbor: 413
+
+Actual position: 4 13
+Neighbor: 513
+Neighbor: 313
+Neighbor: 414
+Neighbor: 412
+
+Actual position: 4 12
+Neighbor: 512
+Neighbor: 312
+Neighbor: 413
+Neighbor: 411
+
+Actual position: 4 11
+Neighbor: 511
+Neighbor: 311
+Neighbor: 412
+Neighbor: 410
+
+Actual position: 4 10
+Neighbor: 510
+Neighbor: 310
+Neighbor: 411
+Neighbor: 49
+
+Actual position: 4 9
+Neighbor: 59
+Neighbor: 39
+Neighbor: 410
+Neighbor: 48
+
+Actual position: 4 8
+Neighbor: 58
+Neighbor: 38
+Neighbor: 49
+Neighbor: 47
+
+Actual position: 4 7
+Neighbor: 57
+Neighbor: 37
+Neighbor: 48
+Neighbor: 46
+

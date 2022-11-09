@@ -11,7 +11,6 @@ canvas1.create_window(200, 140, window=entry1)
 def getWidth():
     width = entry1.get()
     print(width)
-    
 
 button1 = tk.Button(text='Get the width of the matrix window', command=getWidth)
 canvas1.create_window(200, 180, window=button1)
