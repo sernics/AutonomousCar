@@ -5,18 +5,30 @@ import numpy as np
 class Minway(object):
   def __init__(self, matrix : Matrix):
     self.__matrix : Matrix = matrix
-    self.__visited = []    
-    for i in range(self.__matrix.get_range_i()):
-      line = []
-      for j in range(self.__matrix.get_range_j()):
-        line.append(False)
-      self.__visited.append(line)
 
-  def first_better(self, initial_position : Point, final_position : Point):
+  def first_better_with_euclidean(self, initial_position : Point, final_position : Point):
     found = False
     actual_position = initial_position
-    self.__visited[actual_position.get_position_x()][actual_position.get_position_y()] = True
+    movements = 0
     while not found:
+      movements += 1
+      if (actual_position.get_position_x() == final_position.get_position_x()) and (actual_position.get_position_y() == final_position.get_position_y()):
+        found = True
+      neighbors = self.neighbors(actual_position)
+      heuristic = 10000000000
+      for neighbor in neighbors:
+        if self.__get_heuristic_euclidean(neighbor, final_position) < heuristic:
+            heuristic = self.__get_heuristic_euclidean(neighbor, final_position)
+            actual_position = neighbor
+      self.__matrix.print_position(neighbor.get_position_x(), neighbor.get_position_y() + 1, "orange")
+    return movements      
+
+  def first_better_with_manhattan(self, initial_position : Point, final_position : Point) :
+    found = False
+    actual_position = initial_position
+    movements = 0
+    while not found:
+      movements += 1
       if (actual_position.get_position_x() == final_position.get_position_x()) and (actual_position.get_position_y() == final_position.get_position_y()):
         found = True
       neighbors = self.neighbors(actual_position)
@@ -26,7 +38,8 @@ class Minway(object):
         if self.__get_heuristic_manhattan(neighbor, final_position) < heuristic:
             heuristic = self.__get_heuristic_manhattan(neighbor, final_position)
             actual_position = neighbor
-      self.__matrix.print_position(neighbor.get_position_x(), neighbor.get_position_y() + 1, "orange")      
+      self.__matrix.print_position(neighbor.get_position_x(), neighbor.get_position_y() + 1, "orange") 
+    return movements    
 
   def neighbors(self, position : Point):
     neighbors = []
