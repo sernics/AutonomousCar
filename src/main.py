@@ -18,7 +18,7 @@ def main():
   point1 : Point = Point(initial_x, initial_y)
   point2 : Point = Point(final_x, final_y)
   inicio = time.time()
-  print("El número de pasos de la funcion heurística euclídea es de: ",minway.first_better_with_euclidean(point1, point2))
+  print("El número de pasos de la funcion heurística euclídea es de: ",minway.first_better_with_manhattan(point1, point2))
   # print("El número de pasos de la funcion heurística de Manhattan es de: ",minway.first_better_with_manhattan(point1, point2))
   final = time.time()
   print("El tiempo de ejecución ha sido de: ", (final - inicio))
