@@ -1,4 +1,3 @@
-# p02-IA: Coche autonomo
+# Autonomous Car
 - Autores:
   - Sergio Nicolás Seguí
-  - Javier González de la Barreda Arimany
